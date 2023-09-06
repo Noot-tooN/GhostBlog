@@ -12,36 +12,21 @@ services:
       value: mysql
     - key: database__connection__host
       fromService:
-        type: pserv
-        name: mysql
+        type: web
+        name: ghost
         property: host
     - key: database__connection__database
-      value: ghostdb
+      fromService:
+        type: web
+        name: ghost
+        envVarKey: MYSQL_DB
     - key: database__connection__user
-      value: mysql
+      fromService:
+        type: web
+        name: ghost
+        envVarKey: MYSQL_USER
     - key: database__connection__password
       fromService:
-        type: pserv
-        name: mysql
+        type: web
+        name: ghost
         envVarKey: MYSQL_PASSWORD
-
-- type: pserv
-  name: mysql
-  plan: standard
-  env: docker
-  repo: https://github.com/render-examples/mysql
-  autoDeploy: false
-  disk:
-    name: mysql
-    mountPath: /var/lib/mysql
-    sizeGB: 10
-  envVars:
-    - key: MYSQL_DATABASE
-      value: ghostdb
-    - key: MYSQL_USER
-      value: mysql
-    - key: MYSQL_PASSWORD
-      generateValue: true
-    - key: MYSQL_ROOT_PASSWORD
-      generateValue: true
-
