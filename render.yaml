@@ -3,10 +3,6 @@ services:
   name: ghost
   env: docker
   autoDeploy: false
-  disk:
-    name: ghost
-    mountPath: /var/lib/ghost/content
-    sizeGB: 10 #Feel free to change this to suit your needs.
   envVars:
     - key: database__client
       value: mysql
